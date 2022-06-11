@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OpenBankMarvel</string>
+    <string name="no_content_description">No content description</string>
+    <string name="marvel_characters_list">Marvel Characters List</string>
+    <string name="charactername">CharacterName</string>
+    <string name="title_character_characterName">DOCTOR STRANGE</string>
+    <string name="description_character">Formerly a renowned surgeon, Doctor Stephen Strange now serves as the Sorcerer Supreme-Earth\'s foremost protector against magical and mystical threats.</string>
+</resources>
