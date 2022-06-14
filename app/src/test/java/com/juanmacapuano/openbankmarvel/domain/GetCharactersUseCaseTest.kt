@@ -18,6 +18,7 @@ class GetCharactersUseCaseTest {
     @RelaxedMockK
     private lateinit var characterRepository: CharactersRepositoryImpl
 
+    @RelaxedMockK
     lateinit var getCharactersUseCase: GetCharactersUseCase
 
     @Before
@@ -29,10 +30,23 @@ class GetCharactersUseCaseTest {
     @Test
     fun `when api doesnt return anything then load data from database`() = runBlocking {
 
-        coEvery { characterRepository.getAllCharacters() } returns CharactersDTO()
+        coEvery { characterRepository.getAllCharacters() } returns emptyList()
         getCharactersUseCase()
         coVerify(exactly = 1) { characterRepository.getAllCharactersFromDatabase() }
 
+    }
+
+    @Test
+    fun `when api return anything then get values from api`() = runBlocking {
+        val characters = listOf(CharacterModel(0,"test","description","thumb", "thumext"))
+        coEvery { characterRepository.getAllCharacters() } returns characters
+
+        val response = getCharactersUseCase()
+
+        coVerify(exactly = 1) { characterRepository.clearCharacters() }
+        coVerify(exactly = 1) { characterRepository.insertCharacters(any()) }
+        coVerify(exactly = 0) { characterRepository.getAllCharactersFromDatabase() }
+        assert(characters == response)
     }
 
     @Test

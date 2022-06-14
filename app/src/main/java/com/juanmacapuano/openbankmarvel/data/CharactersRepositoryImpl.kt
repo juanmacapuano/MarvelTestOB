@@ -1,10 +1,7 @@
 package com.juanmacapuano.openbankmarvel.data
 
-import android.util.Log
 import com.juanmacapuano.openbankmarvel.data.database.dao.CharacterDao
 import com.juanmacapuano.openbankmarvel.data.database.entities.CharacterEntity
-import com.juanmacapuano.openbankmarvel.data.model.CharacterDTO
-import com.juanmacapuano.openbankmarvel.data.model.CharactersDTO
 import com.juanmacapuano.openbankmarvel.data.network.CharacterService
 import com.juanmacapuano.openbankmarvel.domain.model.CharacterModel
 import com.juanmacapuano.openbankmarvel.domain.model.toDomain
@@ -15,13 +12,13 @@ import javax.inject.Inject
 class CharactersRepositoryImpl @Inject constructor(
     private val api: CharacterService,
     private val characterDao: CharacterDao
-): CharacterRepository {
+) : CharacterRepository {
 
-    override suspend fun getCharacterFromApi(id: Int): CharacterDTO {
+    override suspend fun getCharacterFromApi(id: Int): List<CharacterModel> {
         return api.getCharacter(id = id)
     }
 
-    override suspend fun getAllCharacters(): CharactersDTO {
+    override suspend fun getAllCharacters(): List<CharacterModel>? {
         return api.getAllCharacters()
     }
 

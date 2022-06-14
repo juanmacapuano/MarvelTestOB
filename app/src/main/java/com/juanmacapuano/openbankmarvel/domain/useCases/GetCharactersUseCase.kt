@@ -11,11 +11,9 @@ class GetCharactersUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): List<CharacterModel> {
-        val listCharacter = repositoryImpl.getAllCharacters().data?.results?.map { result ->
-            result.toCharacter()
-        }
+        val listCharacter = repositoryImpl.getAllCharacters() ?: emptyList()
 
-        return if (listCharacter?.isNotEmpty() == true) {
+        return if (listCharacter.isNotEmpty()) {
             repositoryImpl.clearCharacters()
             repositoryImpl.insertCharacters(listCharacter.map { it.toDatabase() })
             listCharacter
@@ -26,16 +24,5 @@ class GetCharactersUseCase @Inject constructor(
                 emptyList()
             }
         }
-
-
-        /*return if (listCharacter?.isNotEmpty() == true) {
-            repositoryImpl.clearCharacters()
-            repositoryImpl.insertCharacters(listCharacter.map { it.toDatabase() })
-            listCharacter
-        } else {
-            return if(repositoryImpl.getAllCharactersFromDatabase().isNotEmpty() == true)
-                else null
-
-        }*/
     }
 }

@@ -1,10 +1,6 @@
 package com.juanmacapuano.openbankmarvel.di
 
-import com.juanmacapuano.openbankmarvel.core.baseUrl
-import com.juanmacapuano.openbankmarvel.data.CharactersRepositoryImpl
 import com.juanmacapuano.openbankmarvel.data.network.CharacterApiClient
-import com.juanmacapuano.openbankmarvel.data.network.CharacterService
-import com.juanmacapuano.openbankmarvel.domain.repository.CharacterRepository
 import com.juanmacapuano.openbankmarvel.utils.Utils
 import dagger.Module
 import dagger.Provides

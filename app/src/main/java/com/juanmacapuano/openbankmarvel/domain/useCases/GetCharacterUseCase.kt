@@ -1,6 +1,7 @@
 package com.juanmacapuano.openbankmarvel.domain.useCases
 
 import com.juanmacapuano.openbankmarvel.data.CharactersRepositoryImpl
+import com.juanmacapuano.openbankmarvel.data.database.entities.toDatabase
 import com.juanmacapuano.openbankmarvel.domain.model.CharacterModel
 import javax.inject.Inject
 
@@ -9,17 +10,14 @@ class GetCharacterUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(id: Int): List<CharacterModel> {
-        val listCharacter = repositoryImpl.getCharacterFromApi(id).data.results.map { result ->
-            result.toCharacter()
-        }
+        val listCharacter = repositoryImpl.getCharacterFromApi(id)
 
-        return listCharacter
-
-        /*return if (listCharacter.isNotEmpty()) {
+        return if (listCharacter.isNotEmpty()) {
             repositoryImpl.clearCharacters()
-            repositoryImpl.insertCharacters(listCharacter.map { it.toDatabase() }
+            repositoryImpl.insertCharacters(listCharacter.map { it.toDatabase() })
+            listCharacter
         } else {
             repositoryImpl.getAllCharactersFromDatabase()
-        }*/
+        }
     }
 }

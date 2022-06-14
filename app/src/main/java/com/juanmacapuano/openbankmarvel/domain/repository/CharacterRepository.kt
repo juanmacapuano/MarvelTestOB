@@ -1,11 +1,10 @@
 package com.juanmacapuano.openbankmarvel.domain.repository
 
-import com.juanmacapuano.openbankmarvel.data.model.CharacterDTO
-import com.juanmacapuano.openbankmarvel.data.model.CharactersDTO
+import com.juanmacapuano.openbankmarvel.domain.model.CharacterModel
 
 interface CharacterRepository {
 
-    suspend fun getAllCharacters(): CharactersDTO
+    suspend fun getAllCharacters(): List<CharacterModel>?
 
-    suspend fun getCharacterFromApi(id: Int): CharacterDTO
+    suspend fun getCharacterFromApi(id: Int): List<CharacterModel>
 }

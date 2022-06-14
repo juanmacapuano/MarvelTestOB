@@ -29,14 +29,13 @@ class CharactersViewModel @Inject constructor(
     fun onCreate() {
         viewModelScope.launch(Dispatchers.IO) {
             _showProgressBar.postValue(true)
-
             val result = getCharactersUseCase()
-
             if (!result.isNullOrEmpty()) {
                 _listCharacters.postValue(result)
                 _showProgressBar.postValue(false)
                 _showTextEmptyList.postValue(false)
             } else {
+                _listCharacters.postValue(emptyList())
                 _showTextEmptyList.postValue(true)
             }
         }
